@@ -1,12 +1,13 @@
 # callbackflow
-android Kotlin example how to run a asyncronic flow using callbackFlow
 
-If you understand suspending funtions in Kotlin, you know that this funtion only returns a single value, but if you need to return asyncronous values, Flow is one answer.
+Android Kotlin example how to run an asynchronous flow using callbackFlow.
+
+If you understand suspending functions in Kotlin, you know that this function only returns a single value, but if you need to return asynchronous values, Flow is one answer.
 
 The source of this information is in kotlin main documentation: https://kotlinlang.org/docs/reference/coroutines/flow.html
 
 
-Flow is named cold asyncronous, that means that the returned value is calculed when is collected. Let see.
+Flow is named cold asynchronous, that means that the returned value is calculated when is collected. Let see.
 
         fun foo(): Flow<Int> = flow { // flow builder
             for (i in 1..3) {
@@ -27,7 +28,7 @@ Flow is named cold asyncronous, that means that the returned value is calculed w
             foo().collect { value -> println(value) } 
         }
 
-Because flow are cold, there is no obvious way to transform asyncronous events from any source to a flow, but what is cold and what is hot ?
+Because flow are cold, there is no obvious way to transform asynchronous events from any source to a flow, but what is cold and what is hot ?
 
 You can check https://medium.com/@elizarov/cold-flows-hot-channels-d74769805f9 to see the difference.
 
@@ -35,7 +36,7 @@ I understand that a Hot source is a source that can emit an event/data and the r
 
 Channels works with coroutines and the meaning is: Deferred values provide a convenient way to transfer a single value between coroutines. Channels provide a way to transfer a stream of values.
 
-**The example that I want to show is how can I use flow asyncronic cold operations on sources that are hot, like events ?**
+**The example that I want to show is how can I use flow asynchronous cold operations on sources that are hot, like events ?**
 
 Searching for answer  I found a way to do that: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/callback-flow.html
 
@@ -43,7 +44,7 @@ The answer is "callbackFlow", it say that:  *"Creates an instance of the cold Fl
 
 *"The resulting flow is cold, which means that block is called every time a terminal operator is applied to the resulting flow."*
 
-So I understand that is like a cold code emmited in a hot source packet and translated to a cold consumer.
+So I understand that is like a cold code emitted in a hot source packet,  and translated to be used by cold consumer.
 
 The code that resumes all this explanation:
 
